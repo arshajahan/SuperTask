@@ -32,9 +32,8 @@ export const postsSlice = createSlice({
         updateStart: (state) => {
             state.pending = true;
         },
-        updateSuccess: (state, action) => {
+        updateSuccess: (state) => {
             state.pending = false;
-            state.data = action.payload;
         },
         updateError: (state) => {
             state.error = true;

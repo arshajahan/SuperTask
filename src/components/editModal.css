@@ -1,0 +1,52 @@
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+
+  }
+
+
+  .modal-form{
+    padding: 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    gap: 1rem;
+    border: 1px solid white;
+    margin: auto;
+    margin-top: 15rem;
+    background-color: rgb(56, 50, 50);
+    position: relative;
+  }
+
+  .close{
+    top: 0;
+    right: 0;
+    text-align: center;
+    width: 2rem;
+    border: 1px solid white;
+    font-size: x-large;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .close:hover{
+    background-color: black;
+    color: red;
+  }
+
+  .modal-form input{
+    height: 2rem;
+  }
+
+  .modal-form button{
+    width: fit-content;
+    margin: auto;
+    cursor: pointer;
+  }

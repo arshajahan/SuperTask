@@ -4,9 +4,12 @@ import { deletePost, fetchPosts } from '../redux/apiCalls';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Loading from './Loading';
+import EditModal from './EditModal';
 
 function AllPosts() {
   const dispatch = useDispatch();
+  const [editMode, setEditMode] = useState(false);
+  const [post, setPost] = useState(null);
   const {data, pending, error} = useSelector((state) => state.posts);
 
   useEffect(() => {
@@ -14,11 +17,20 @@ function AllPosts() {
     // eslint-disable-next-line
   }, []);
 
+  const openEdit = (p) => {
+    setEditMode(true);
+    setPost(p);
+  }
+
+  const closeModalHandler = () => {
+    setEditMode(false);
+}
+
   const [pageNumber, setPageNumber] = useState(0);
   const postsPerPage = 5;
   const pagesVisited = pageNumber * postsPerPage;
   const pageCount = Math.ceil(data.length / postsPerPage);
-
+  
   const displayPosts = data
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
@@ -32,7 +44,7 @@ function AllPosts() {
               <p>
                 <strong>ID:</strong> {post.id}
               </p>
-              <button>Edit</button>
+              <button onClick={() => openEdit(post)}>Edit</button>
               <button onClick={() => handleDelete(post.id)}>Delete</button>
             </div>
       )
@@ -73,8 +85,14 @@ function AllPosts() {
             activeClassName={"paginationActive"}
           />
         </div>}
-      {pending && <Loading/>}
+      {(pending && !editMode) && <Loading/>}
       {error && <h1>Loading Error!....</h1>}
+      {editMode && 
+        <EditModal 
+            post={post}
+            onCloseModal={closeModalHandler}
+        />
+    }
     </div>
   );
 }

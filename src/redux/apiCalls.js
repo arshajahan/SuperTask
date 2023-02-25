@@ -10,8 +10,8 @@ export const updatePost = async (post, dispatch) => {
             "https://jsonplaceholder.typicode.com/posts/"+post.id, 
             post
         );
-        dispatch(updateSuccess(res.data))
-        console.log(res.data)
+        dispatch(updateSuccess())
+        return res.data
     } catch (err) {
         dispatch(updateError())
     }
@@ -20,11 +20,12 @@ export const updatePost = async (post, dispatch) => {
 export const addPost = async (post, dispatch) => {
     dispatch(addStart());
     try {
-        const res = await axios.put(
+        const res = await axios.post(
             "https://jsonplaceholder.typicode.com/posts", 
             post
         );
         dispatch(addSuccess(res.data))
+        return res
     } catch (err) {
         dispatch(addError())
     }

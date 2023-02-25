@@ -1,53 +1,68 @@
-import React from 'react'
-import { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatePost } from '../redux/apiCalls';
 import './editModal.css'
+import Loading from './Loading';
 
 function EditModal(props) {
-    const [doc, setDoc] = useState({})
-
-    useEffect(() => {
-        setDoc((prev) => props.docdata);
-    },[props])
-
+    const [updated, setUpdated] = useState(false);
+    const {pending} = useSelector((state)=> state.posts)
+    const [post, setPost] = useState(props.post)
+    const dispatch = useDispatch();
     const handleChange = (e) => {
         const value = e.target.value;
-        setDoc({...doc, [e.target.name]:value})
+        setPost({...post, [e.target.name]:value})
     }
-
-    const submitHandler = (e) =>{
+    const submitHandler = async(e) =>{
         e.preventDefault();
-        props.onSaveDoc(doc);
+        const res = await updatePost(post, dispatch);
+        setPost(res);
+        setUpdated(true);
     }
 
   return (
     <div className='modal'>
         <div className='modal-content'>
             <form onSubmit={submitHandler} className='modal-form'>
+                {pending && <Loading/>}
                 <span onClick={() => props.onCloseModal()} className='close'>X</span>
+                {!updated &&
+                <>
                 <input 
-                    type='text'
+                    type='number'
                     required
-                    defaultValue={doc.name}
-                    placeholder='Doctor Name'
-                    name= 'name'
+                    defaultValue={post.userId}
+                    placeholder='User Id'
+                    name= 'userId'
                     onChange = {e => handleChange(e)}
                 />
                 <input 
                     type='text'
-                    defaultValue={doc.specs}
-                    placeholder='Specialization'
-                    name='specs'
+                    defaultValue={post.title}
+                    placeholder='Post Title'
+                    name='title'
                     onChange = {e => handleChange(e)}
                 />
                 <input 
                     type='text'
-                    defaultValue={doc.qualification}
-                    placeholder='qualifications'
-                    name='qualification'
+                    defaultValue={post.body}
+                    placeholder='Post body'
+                    name='body'
                     onChange = {e => handleChange(e)}
                 />
-                <button>Add</button>
+                <button>update</button>
+                </>
+                }
+                { updated &&
+                    <div>
+                    <h2>Updated Post Details</h2>
+                    <p>Post Id: {post.id}</p>
+                    <p>User Id: {post.userId}</p>
+                    <p>Post title: {post.title}</p>
+                    <p>Post content: {post.body}</p>
+                    </div>  
+                }
             </form>
         </div>
     </div>
