@@ -12,9 +12,9 @@ function App() {
     <Router>
     <Title/>
       <Routes>
-        <Route path='/' element={<Dashboard/>} />
-        <Route path='/allposts' element={<AllPosts/>} />
-        <Route path='/add' element={<AddPost/>}/> 
+        <Route path='/supertask' element={<Dashboard/>} />
+        <Route path='/supertask/allposts' element={<AllPosts/>} />
+        <Route path='/supertask/add' element={<AddPost/>}/> 
       </Routes>
     </Router>
     </div>
