@@ -1,0 +1,33 @@
+.dashboard{
+    background-color: rgb(56, 50, 50);
+    height: 100vh;
+}
+
+.cards{
+    padding-right: 3rem;
+    padding-left: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    padding-top: 9rem;
+}
+
+.card:hover{
+    background-color:darkred;
+}
+
+.card{
+    height: 270px;
+    width: 270px;
+    background-color: crimson;
+    text-align: center;
+    position: relative;
+}
+
+.card span{
+    position: absolute;
+    color: white;
+    font-size:xx-large;
+    margin-top: 40%;
+    right: 10%;
+}

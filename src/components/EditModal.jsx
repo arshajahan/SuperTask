@@ -44,23 +44,23 @@ function EditModal(props) {
                     name='title'
                     onChange = {e => handleChange(e)}
                 />
-                <input 
+                <textarea 
                     type='text'
                     defaultValue={post.body}
                     placeholder='Post body'
                     name='body'
                     onChange = {e => handleChange(e)}
                 />
-                <button>update</button>
+                <button className='link'>update</button>
                 </>
                 }
                 { updated &&
-                    <div>
+                    <div className='updated'>
                     <h2>Updated Post Details</h2>
-                    <p>Post Id: {post.id}</p>
-                    <p>User Id: {post.userId}</p>
-                    <p>Post title: {post.title}</p>
-                    <p>Post content: {post.body}</p>
+                    <p>Post Id: <span className='colorFont'>{post.id}</span></p>
+                    <p>User Id: <span className='colorFont'>{post.userId}</span></p>
+                    <p>Post title: <span className='colorFont'>{post.title}</span></p>
+                    <p>Post content: <span className='colorFont'>{post.body}</span></p>
                     </div>  
                 }
             </form>

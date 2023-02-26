@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Loading from './Loading';
 import EditModal from './EditModal';
+import { Link } from 'react-router-dom';
 
 function AllPosts() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function AllPosts() {
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
       return(
-            <div key={post.id}>
+            <div key={post.id} className='one-post'>
               <h2>{post.title}</h2>
               <p>{post.body}</p>
               <p>
@@ -44,8 +45,10 @@ function AllPosts() {
               <p>
                 <strong>ID:</strong> {post.id}
               </p>
-              <button onClick={() => openEdit(post)}>Edit</button>
-              <button onClick={() => handleDelete(post.id)}>Delete</button>
+              <div className='btns'>
+                <span className='link' onClick={() => openEdit(post)}>Edit</span>&nbsp;&nbsp;
+                <span className='link' onClick={() => handleDelete(post.id)}>Delete</span>
+              </div>
             </div>
       )
     })
@@ -68,12 +71,14 @@ function AllPosts() {
 }
 
   return (
-    <div className="App">
-      <button>Add New Post</button>
+    <div className="container">
+      <Link to='/add' className='link'>Add New Post</Link>
         {data &&
-        <div> 
+        <div className='post-grid'> 
           {displayPosts}
-          <ReactPaginate
+        </div>}
+        <br/>
+        <ReactPaginate
             previousLabel={"<"}
             nextLabel={">"}
             pageCount={pageCount}
@@ -84,7 +89,6 @@ function AllPosts() {
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
           />
-        </div>}
       {(pending && !editMode) && <Loading/>}
       {error && <h1>Loading Error!....</h1>}
       {editMode && 

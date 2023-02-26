@@ -21,6 +21,7 @@ const submitHandler = async(e) =>{
   if(res.status === 201){
     setAdded(true);
     alert("New Post added Successfully");
+    e.target.reset();
   }
 }
 
@@ -30,11 +31,11 @@ const closeAlert = () => {
 
 
   return (
-    <div>
+    <div className='container'>
       {pending && <Loading/>}
-      <div>Add New Post</div>
-      <form onSubmit={submitHandler}>
-        <div>
+      <h2>Add New Post</h2><hr/>
+      <form onSubmit={submitHandler} className='addForm'>
+        <div className='inputs'>
           <label>UserId</label>
           <input
             required
@@ -44,7 +45,7 @@ const closeAlert = () => {
             onChange = {e => inputChangeHandler(e)} 
           />
         </div>
-        <div>
+        <div className='inputs'>
           <label>Post Title</label>
           <input
             required
@@ -53,21 +54,21 @@ const closeAlert = () => {
             onChange = {e => inputChangeHandler(e)} 
           />
         </div>
-        <div>
+        <div className='inputs'>
           <label>Post Body</label>
-          <input
+          <textarea
             required
             placeholder='Enter user the body'
             name='body'
             onChange = {e => inputChangeHandler(e)} 
           />
         </div>
-        <button>Add</button>
+        <button className='link'>Add Post</button>
       </form>
       { added &&
-        <div>
-          <span onClick={()=>closeAlert()}>X</span>
-          <h2>New Post Details</h2>
+        <div className='added'>
+          <span onClick={()=>closeAlert()} id='close'>X</span>
+          <h2>Latest Post Details</h2>
           <p>Post Id: {data.id}</p>
           <p>User Id: {data.userId}</p>
           <p>Post title: {data.title}</p>

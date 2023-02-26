@@ -1,0 +1,26 @@
+
+
+.post-grid{
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+}
+
+.one-post{
+    padding: 1rem;
+    display: grid;
+    gap: .5rem;
+    border: 2px solid white;
+    flex-basis: 380px;
+}
+
+.one-post h2{
+    color: yellow;
+}
+
+.btns{
+    justify-self: right;
+    width: max-content;
+}
